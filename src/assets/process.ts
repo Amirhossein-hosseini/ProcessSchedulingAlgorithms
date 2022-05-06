@@ -1,15 +1,20 @@
+
 export default class Process{
+
+  totalBurstTime: any;
+
   processName: string | undefined;
   static processNum: number = 0;
-  processDtl: { arrivalTime: number; burstTime: number; priority: number; startTime: number; leftTime: number; endTime: number; turnAround: number; waitTime: number; } | undefined;
-  color: string | undefined;
 
-  constructor (processName: string, arrivalTime: number, priority: number, burstTime: number, color: any) {
+  processDtl: { arrivalTime: number; burstTime: number; startTime: number; leftTime: number; endTime: number; turnAround: number; waitTime: number; } | undefined;
+  color: string | undefined;
+  length: number | undefined;
+
+  constructor (processName: string, arrivalTime: number,  burstTime: number, color: any) {
     this.processName = processName;
     this.processDtl = {
       arrivalTime: Number(arrivalTime),
       burstTime: Number(burstTime),
-      priority: Number(priority),
       startTime: -1,
       leftTime: Number(burstTime),
       endTime: -1,
@@ -26,8 +31,6 @@ export default class Process{
 
   public getBurstTime (): number { if (!this.processDtl) return -1; return this.processDtl.burstTime; };
 
-  public getPriority (): number { if (!this.processDtl) return -1; return this.processDtl.priority; };
-
   public getStartTime (): number { if (!this.processDtl) return -1; return this.processDtl.startTime; };
 
   public getLeftTime (): number { if (!this.processDtl) return -1; return this.processDtl.leftTime; };
@@ -39,6 +42,8 @@ export default class Process{
   public getWaitTime (): number { if (!this.processDtl) return 1; return this.processDtl.waitTime; };
 
   public getColor () { return this.color; };
+
+
 
   /** Setters or Mutators */
   public setArrivalTime (time: number) { if (this.processDtl) this.processDtl.arrivalTime = time; };
@@ -53,8 +58,9 @@ export default class Process{
 
   public setWaitTime (time: number) { if (this.processDtl) this.processDtl.waitTime = time; };
 
+
   /** Status update */
-  public isCompleted () { 
+  public isCompleted () {
     if (!this.processDtl) return false;
     return (this.processDtl.leftTime === 0);
   };
@@ -64,7 +70,11 @@ export default class Process{
     return (this.processDtl.arrivalTime >= time);
   };
 
+
+
 }
+
+
 
 export function clone(instance: any) {
   return Object.assign(

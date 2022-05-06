@@ -11,11 +11,10 @@ import { FCFSComponent } from './fcfs/fcfs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GanttChartCellComponent } from './gantt-chart-cell/gantt-chart-cell.component';
 import { NpsjfComponent } from './npsjf/npsjf.component';
-import { NppComponent } from './npp/npp.component';
 import { PsjfComponent } from './psjf/psjf.component';
-import { PpComponent } from './pp/pp.component';
 import { RrComponent } from './rr/rr.component';
 import { SummaryTableComponent } from './summary-table/summary-table.component';
+import { MlfqComponent } from './mlfq/mlfq.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +23,10 @@ import { SummaryTableComponent } from './summary-table/summary-table.component';
     FCFSComponent,
     GanttChartCellComponent,
     NpsjfComponent,
-    NppComponent,
     PsjfComponent,
-    PpComponent,
     RrComponent,
-    SummaryTableComponent
+    SummaryTableComponent,
+    MlfqComponent
   ],
   imports: [
     BrowserModule,

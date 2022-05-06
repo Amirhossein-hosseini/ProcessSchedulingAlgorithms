@@ -1,18 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import rr from '../../assets/algorithms/rr';
+import mlfq from 'src/assets/algorithms/pmlfq';
 import process from '../../assets/process';
 
 @Component({
-  selector: 'app-rr',
-  template: `<h3>Round Robbin</h3>
-  <app-cell *ngFor="let process of rrprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="rrprocess.length"></app-cell>
-  <div class="mt-4 text-info" data-toggle="collapse" href="#summaryTablerr" role="button" aria-expanded="false" aria-controls="summaryTablerr">View Summary Table&#9660;</div>
-  <div class="collapse" id="summaryTablerr">
-    <app-summary-table [myprocess]="calprocess"></app-summary-table>
-  </div>
-  `
+  selector: 'app-mlfq',
+  templateUrl: './mlfq.component.html',
+  styleUrls: ['./mlfq.component.css']
 })
-export class RrComponent implements OnInit {
+export class MlfqComponent implements OnInit {
 
   totalBurstTime = 0;
   process: process[] = [];
@@ -35,8 +30,8 @@ export class RrComponent implements OnInit {
   }
 
   calculatePSJF() {
-    this.rrprocess = rr(this.process, this.myProcess.rr).rr;
-    this.calprocess = rr(this.process, this.myProcess.rr).rrPro
+    this.rrprocess = mlfq(this.process, this.myProcess.rr).rr;
+    this.calprocess = mlfq(this.process, this.myProcess.rr).rrPro
     console.log(this.rrprocess.length);
     this.totalBurstTime = this.rrprocess.reduce((sum, p) => {
       return sum + p.getBurstTime();
@@ -48,3 +43,5 @@ export class RrComponent implements OnInit {
   }
 
 }
+
+

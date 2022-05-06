@@ -1,7 +1,7 @@
 <div class="container">
   <div class="jumbotron p-10">
     <h1>Process Scheduling Algorithms</h1>
-    <small class="text-muted">Presented by Koh Shi Jing</small>
+    <small class="text-muted">Presented AmirHosseinHosseini</small>
   </div>
   <div class="card" style="overflow-x: auto;">
     <div class="card-body">
@@ -62,20 +62,20 @@
       <app-npsjf [myProcess]="process"></app-npsjf>
       <hr>
     </div>
-    <div class="mb-3" *ngIf="npp">
-      <app-npp [myProcess]="process"></app-npp>
-      <hr>
-    </div>
+
     <div class="mb-3" *ngIf="psjf">
       <app-psjf [myProcess]="process"></app-psjf>
       <hr>
     </div>
-    <div class="mb-3" *ngIf="pp">
-      <app-pp [myProcess]="process"></app-pp>
-      <hr>
-    </div>
+
+
     <div class="mb-3" *ngIf="rr">
       <app-rr [myProcess]="process"></app-rr>
+      <hr>
+    </div>
+    <div class="mb-3" *ngIf="mlfq">
+      <app-mlfq [myProcess]="process"></app-mlfq>
+        <hr>
     </div>
   </div>
 </div>

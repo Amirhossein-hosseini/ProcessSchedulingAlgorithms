@@ -1,0 +1,6 @@
+<h3>Mlfq</h3>
+  <app-cell *ngFor="let process of rrprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="rrprocess.length"></app-cell>
+  <div class="mt-4 text-info" data-toggle="collapse" href="#summaryTablerr" role="button" aria-expanded="false" aria-controls="summaryTablerr">View Summary Table&#9660;</div>
+  <div class="collapse" id="summaryTablerr">
+    <app-summary-table [myprocess]="calprocess"></app-summary-table>
+  </div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PpComponent } from './pp.component';
+import { MlfqComponent } from './mlfq.component';
 
-describe('PpComponent', () => {
-  let component: PpComponent;
-  let fixture: ComponentFixture<PpComponent>;
+describe('MlfqComponent', () => {
+  let component: MlfqComponent;
+  let fixture: ComponentFixture<MlfqComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PpComponent ]
+      declarations: [ MlfqComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PpComponent);
+    fixture = TestBed.createComponent(MlfqComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

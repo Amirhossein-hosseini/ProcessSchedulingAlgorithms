@@ -12,11 +12,9 @@ export class AppComponent {
   submitted = false;
   fcfs = true;
   npsjf = true;
-  npp = true;
   psjf = true;
-  pp = true;
   rr = true;
-
+  mlfq = true;
   @ViewChild(TableComponent) process: any;
 
   receiveMessage($event: any) {
@@ -25,8 +23,8 @@ export class AppComponent {
 
   changeState($event: any) {
     let id:string = $event.target.id;
-    
-    if (id === "fcfs" || id === "npsjf" || id === "npp" || id === "psjf" || id === "pp" || id === "rr")
+
+    if (id === "fcfs" || id === "npsjf"  || id === "psjf" || id === "rr" || id === "mlfq")
       this[id] = $event.target.checked;
   }
 

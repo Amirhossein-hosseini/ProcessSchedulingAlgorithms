@@ -31,8 +31,8 @@ export class NpsjfComponent implements OnInit {
   }
 
   generateProcess() {
-    this.myProcess.processes.forEach((p: { name: string; start: number; burst: number; priority: number; color: any; }) => {
-      this.process.push(new process(p.name, p.start, p.priority, p.burst, p.color))
+    this.myProcess.processes.forEach((p: { name: string; start: number; burst: number;  color: any; }) => {
+      this.process.push(new process(p.name, p.start,  p.burst, p.color))
     })
   }
 

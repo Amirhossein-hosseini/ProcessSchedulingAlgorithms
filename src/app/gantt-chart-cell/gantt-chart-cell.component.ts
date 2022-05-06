@@ -8,7 +8,7 @@ import process from '../../assets/process';
   <div class="start">
     <span>{{ myProcess.getStartTime() }}</span>
   </div>
-  {{myProcess.getProcessName()}}
+  {{myProcess?.getProcessName()}}
   <div *ngIf="checklast()" class="last">
     <span >{{ myProcess.getEndTime() }}</span>
   </div>
