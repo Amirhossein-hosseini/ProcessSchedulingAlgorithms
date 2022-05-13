@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { faTrash} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,7 +12,20 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
     <label class="d-none d-md-block col-3" style="float: right; white-space: nowrap;">
       <span>Round Robbin Interval:</span>
       <input type="text" class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
+      <!-- <span class="mt-3 p-1">Mlfq InterVal:</span>
+      <input type="text" class="form-control" id="rr" placeholder="mlfqI...." [(ngModel)]="mlfqI" value={{mlfqI}}>
+      <input type="text" class="form-control mt-3" id="rr" placeholder="mlfqII...." [(ngModel)]="mlfqII" value={{mlfqII}}> -->
+
+
     </label>
+<br><br>
+  <!-- <button type="submit" class="btn btn-primary" (click)="addMlfq()")>+ Add Queen for mlfq</button>
+    <label class="d-none d-md-block col-3" style="float: right; white-space: nowrap;">
+      <span>mlfq Interval:</span>
+      <input type="text" class="form-control" id="rr" [(ngModel)]="mlfq" value={{mlfq}}>
+    </label> -->
+
+
     <div *ngIf="rrWarning" class="alert alert-danger alert-dismissible mt-2" role="alert">
     Round Robbin Interval value should be more than 0
       <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)='getAlert=false'>
@@ -21,6 +35,8 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
     <div class="d-md-none col-12 mt-2 p-0">
       <input type="text" placeholder="Round Robbin Interval" class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
     </div>
+
+
   </div>
   <div *ngIf="getAlert" class="alert alert-danger alert-dismissible mt-2" role="alert">
     Make sure only numeric inputs.
@@ -91,12 +107,17 @@ export class TableComponent implements OnInit {
   rr: number = 3;
   rrWarning = false;
 
+  orderForm: FormGroup | undefined;
+  items: FormArray | undefined;
   @Output() submitEvent = new EventEmitter<boolean>();
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {
   }
+  ngOnInit(): void {
 
-  ngOnInit(): void { }
+
+
+   }
 
   addProcess () {
     this.processes.push({
@@ -121,7 +142,7 @@ export class TableComponent implements OnInit {
   }
 
   runProcess () {
-    if(this.rr < 1) {
+    if(this.rr < 1 ) {
       this.rrWarning = true;
     }
     else{
@@ -132,6 +153,7 @@ export class TableComponent implements OnInit {
         else if (/[a-z]/i.test(item.start) || /[a-z]/i.test(item.burst) ) {
           this.getAlert = true;
         }
+
         else{
           this.getWarning = false;
           this.getAlert = false;
@@ -146,5 +168,8 @@ export class TableComponent implements OnInit {
     this.submitted = false;
     this.submitEvent.emit(this.submitted);
   }
+
+
+
 
 }

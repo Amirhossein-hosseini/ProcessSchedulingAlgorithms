@@ -1,64 +1,86 @@
 import process, {clone} from '../process';
-import { compareArrival } from '../comparators/comparators';
+import {  compareArrival, compareName } from '../comparators/comparators';
 
-export default function mlfq(p: process[], mlfqI: number) {
+export default function pp(p: process[],mlfqI:number,mlfqII:number) {
   let waitingList: process[] = [...p].sort(compareArrival);
   let minArr = findMinArrival(p);
-  let rrPro: process[] = [...p];
-  let rr: process[] = [];
+  let ppPro: process[] = [...p];
+  let pp: process[] = [];
+  let arrivedList: process[] = [];
   let totalBurstTime = waitingList.reduce((total, currp) => {
     return total + currp.getBurstTime();
   }, 0) + minArr;
 
-  rr.push(clone(waitingList[0]));
-  rr[0].setStartTime(minArr);
-  rr[0].setLeftTime();
+  pp.push(clone(waitingList[0]));
+  pp[0].setStartTime(minArr);
+  pp[0].setLeftTime();
   waitingList.shift();
   for(let i = minArr + 1; i <= totalBurstTime; i++) {
-    if(rr[rr.length - 1].isCompleted()) {
-      rr[rr.length - 1].setEndTime(i);
+    for(let n = 0; n < waitingList.length; n++) {
+      if(waitingList[n].getArrivalTime() === i) {
+        arrivedList.push(clone(waitingList[n]));
+        waitingList.shift();
+      }
+      else break;
+    }
 
-      let temp = rrPro.find(o => o.getProcessName() === rr[rr.length - 1].getProcessName());
+    if(arrivedList.length > 1){
+      arrivedList.sort(compareName);
+    }
+
+    if(pp[pp.length - 1].isCompleted()) {
+      pp[pp.length - 1].setEndTime(i);
+      pp[pp.length - 1].setTurnAround(i - pp[pp.length - 1].getArrivalTime());
+      pp[pp.length - 1].setWaitTime(pp[pp.length - 1].getTurnAround() - pp[pp.length - 1].getBurstTime());
+
+      let temp = ppPro.find(o => o.getProcessName() === pp[pp.length - 1].getProcessName());
       let index: number;
       if(temp){
-        index = rrPro.indexOf(temp);
-        rrPro[index].setEndTime(rr[rr.length - 1].getEndTime());
-        rrPro[index].setTurnAround(i - rrPro[index].getArrivalTime());
-        rrPro[index].setWaitTime(rrPro[index].getTurnAround() - rrPro[index].getBurstTime());
+        index = ppPro.indexOf(temp);
+        ppPro[index].setEndTime(pp[pp.length - 1].getEndTime());
+        ppPro[index].setTurnAround(pp[pp.length - 1].getTurnAround());
+        ppPro[index].setWaitTime(pp[pp.length - 1].getWaitTime());
       }
 
-      if(waitingList.length > 0) {
-        rr.push(clone(waitingList[0]));
-        rr[rr.length - 1].setStartTime(i);
-        rr[rr.length - 1].setLeftTime();
-        waitingList.shift();
+      if(arrivedList.length > 0) {
+        pp.push(clone(arrivedList[0]));
+        pp[pp.length - 1].setStartTime(i);
+        pp[pp.length - 1].setLeftTime();
+        arrivedList.shift();
 
-        let temp = rrPro.find(o => o.getProcessName() === rr[rr.length - 1].getProcessName());
+        let temp = ppPro.find(o => o.getProcessName() === pp[pp.length - 1].getProcessName());
         let index: number;
-        if(temp) {
-          index = rrPro.indexOf(temp);
-          rrPro[index].setStartTime(rr[rr.length - 1].getStartTime());
+        if(temp){
+          index = ppPro.indexOf(temp);
+          ppPro[index].setStartTime(pp[pp.length - 1].getStartTime());
         }
       }
     }
     else {
-      if(waitingList.length > 0 && i % mlfqI === 0) {
-        rr[rr.length - 1].setEndTime(i);
-        waitingList.push(clone(rr[rr.length - 1]));
-        waitingList[waitingList.length - 1].setArrivalTime(i);
-        waitingList.sort(compareArrival);
+      if(arrivedList.length > 0 && i % mlfqI === 0){} {
+        pp[pp.length - 1].setEndTime(i);
+        arrivedList.push(clone(pp[pp.length - 1]));
 
-        rr.push(clone(waitingList[0]));
-        rr[rr.length - 1].setStartTime(i);
-        rr[rr.length - 1].setLeftTime();
-        waitingList.shift();
+        pp.push(clone(arrivedList[0]));
+        pp[pp.length - 1].setStartTime(i);
+        pp[pp.length - 1].setLeftTime();
+        arrivedList.shift();
       }
+        if (arrivedList.length > 0 && i % mlfqII === 0){
+          pp[pp.length - 1].setEndTime(i);
+          arrivedList.push(clone(pp[pp.length - 1]));
+
+          pp.push(clone(arrivedList[0]));
+          pp[pp.length - 1].setStartTime(i);
+          pp[pp.length - 1].setLeftTime();
+          arrivedList.shift();
+        }
       else {
-        rr[rr.length - 1].setLeftTime();
+        pp[pp.length - 1].setLeftTime();
       }
     }
   }
-  return {rr, rrPro};
+  return {pp, ppPro};
 }
 
 function findMinArrival (process: any) {

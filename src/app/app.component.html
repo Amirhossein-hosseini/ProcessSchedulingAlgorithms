@@ -1,9 +1,9 @@
 <div class="container">
   <div class="jumbotron p-10">
     <h1>Process Scheduling Algorithms</h1>
-    <small class="text-muted">Presented AmirHosseinHosseini</small>
-  </div>
-  <div class="card" style="overflow-x: auto;">
+    <h3 class="text-muted">Presented AmirHosseinHosseini</h3>
+   </div>
+   <div class="card" style="overflow-x: auto;">
     <div class="card-body">
       <app-table (submitEvent)="receiveMessage($event)"></app-table>
       <div class="mt-2 d-none d-md-block">
@@ -12,17 +12,17 @@
             <input type="checkbox" name="fcfs" id="fcfs" value="fcfs" checked (click)="changeState($event)"> FCFS
           </label>
           <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="npsjf" id="npsjf" value="npsjf" checked (click)="changeState($event)"> Non-Preemptive SJF
+            <input type="checkbox" name="npsjf" id="npsjf" value="npsjf" checked (click)="changeState($event)"> Non-Preemptive SJF(sjf)
           </label>
-          <label class="btn btn-outline-danger">
+          <!-- <label class="btn btn-outline-danger">
             <input type="checkbox" name="npp" id="npp" value="fcfs" checked (click)="changeState($event)"> Non-Preemptive Priority
-          </label>
+          </label> -->
           <label class="btn btn-outline-warning">
-            <input type="checkbox" name="psjf" id="psjf" value="psjf" checked (click)="changeState($event)"> Preemptive SJF
+            <input type="checkbox" name="psjf" id="psjf" value="psjf" checked (click)="changeState($event)"> Preemptive SJF(SRT)
           </label>
-          <label class="btn btn-outline-info">
+          <!-- <label class="btn btn-outline-info">
             <input type="checkbox" name="pp" id="pp" value="pp" checked (click)="changeState($event)"> Preemptive Priority
-          </label>
+          </label> -->
           <label class="btn btn-outline-dark">
             <input type="checkbox" name="rr" id="rr" value="rr" checked (click)="changeState($event)"> Round Robin
           </label>
@@ -73,9 +73,9 @@
       <app-rr [myProcess]="process"></app-rr>
       <hr>
     </div>
-    <div class="mb-3" *ngIf="mlfq">
+    <!-- <div class="mb-3" *ngIf="mlfq">
       <app-mlfq [myProcess]="process"></app-mlfq>
         <hr>
-    </div>
+    </div> -->
   </div>
 </div>

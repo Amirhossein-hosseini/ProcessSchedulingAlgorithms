@@ -6,11 +6,11 @@ export default class Process{
   processName: string | undefined;
   static processNum: number = 0;
 
-  processDtl: { arrivalTime: number; burstTime: number; startTime: number; leftTime: number; endTime: number; turnAround: number; waitTime: number; } | undefined;
+  processDtl: { arrivalTime: number; burstTime: number; waitTime:number; leftTime:number; turnAround:number; endTime:number; startTime: number; } | undefined;
   color: string | undefined;
   length: number | undefined;
 
-  constructor (processName: string, arrivalTime: number,  burstTime: number, color: any) {
+  constructor (processName: string, arrivalTime: number,  burstTime: number, color: any,) {
     this.processName = processName;
     this.processDtl = {
       arrivalTime: Number(arrivalTime),
@@ -18,6 +18,7 @@ export default class Process{
       startTime: -1,
       leftTime: Number(burstTime),
       endTime: -1,
+      // Pid:-1,
       turnAround: -1,
       waitTime: -1
     };
@@ -26,6 +27,8 @@ export default class Process{
 
   /** Getters or Accessors */
   public getProcessName () { return this.processName; };
+
+
 
   public getArrivalTime (): number { if (!this.processDtl) return -1; return this.processDtl.arrivalTime; };
 
@@ -46,6 +49,9 @@ export default class Process{
 
 
   /** Setters or Mutators */
+
+
+
   public setArrivalTime (time: number) { if (this.processDtl) this.processDtl.arrivalTime = time; };
 
   public setStartTime (time: number) { if (this.processDtl) this.processDtl.startTime = time; };

@@ -10,6 +10,7 @@ export function compareBurstTime (p1: process, p2: process) {
 
 
 
+
 export function compareName (p1: process, p2: process) {
   let p1name:any = p1.getProcessName();
   let p2name:any = p2.getProcessName();

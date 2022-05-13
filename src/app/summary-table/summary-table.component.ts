@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import process from '../../assets/process';
 import { avgTurnAround, avgWaitingTime } from '../../assets/calculations/calculateAvg';
-import { totalTurnAround, totalWaitingTime } from '../../assets/calculations/calculateTotal';
+import {  totalTurnAround, totalWaitingTime } from '../../assets/calculations/calculateTotal';
 
 @Component({
   selector: 'app-summary-table',
@@ -46,6 +46,7 @@ export class SummaryTableComponent implements OnInit {
   totalWT: number = 0;
   avgTA: number = 0;
   avgWT: number = 0;
+  // totalPids: number = 0;
 
   constructor() { }
 
@@ -54,7 +55,8 @@ export class SummaryTableComponent implements OnInit {
       this.totalTA = totalTurnAround(this.myprocess);
       this.totalWT = totalWaitingTime(this.myprocess);
       this.avgWT = avgWaitingTime(this.myprocess);
-      this.avgTA = avgTurnAround(this.myprocess)
+      this.avgTA = avgTurnAround(this.myprocess);
+      // this.totalPids = totalPids(this.myprocess);
     }
   }
 
