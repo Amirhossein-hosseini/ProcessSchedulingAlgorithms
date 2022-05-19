@@ -26,7 +26,7 @@ import { MlfqComponent } from './mlfq/mlfq.component';
     PsjfComponent,
     RrComponent,
     SummaryTableComponent,
-    MlfqComponent
+    MlfqComponent,
   ],
   imports: [
     BrowserModule,

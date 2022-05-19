@@ -46,7 +46,6 @@ export class SummaryTableComponent implements OnInit {
   totalWT: number = 0;
   avgTA: number = 0;
   avgWT: number = 0;
-  // totalPids: number = 0;
 
   constructor() { }
 
@@ -56,7 +55,6 @@ export class SummaryTableComponent implements OnInit {
       this.totalWT = totalWaitingTime(this.myprocess);
       this.avgWT = avgWaitingTime(this.myprocess);
       this.avgTA = avgTurnAround(this.myprocess);
-      // this.totalPids = totalPids(this.myprocess);
     }
   }
 

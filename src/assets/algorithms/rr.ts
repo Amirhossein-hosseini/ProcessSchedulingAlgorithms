@@ -1,11 +1,11 @@
-import process, {clone} from '../process';
+import process, { clone } from '../../assets/process';
 import { compareArrival } from '../comparators/comparators';
 
 export default function rr(p: process[], rrI: number) {
   let waitingList: process[] = [...p].sort(compareArrival);
   let minArr = findMinArrival(p);
-  let rrPro: process[] = [...p]; 
-  let rr: process[] = []; 
+  let rrPro: process[] = [...p];
+  let rr: process[] = [];
   let totalBurstTime = waitingList.reduce((total, currp) => {
     return total + currp.getBurstTime();
   }, 0) + minArr;

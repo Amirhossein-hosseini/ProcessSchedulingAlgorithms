@@ -10,11 +10,18 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
     <button *ngIf="processes.length > 0 && !submitted" type="button" class="btn btn-outline-success ml-2" (click)=runProcess()>Run</button>
     <button *ngIf="submitted" type="button" class="btn btn-outline-danger ml-2" (click)=cancelProcess()>Stop</button>
     <label class="d-none d-md-block col-3" style="float: right; white-space: nowrap;">
+          <div class="form-group mt-5">
+
       <span>Round Robbin Interval:</span>
-      <input type="text" class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
-      <!-- <span class="mt-3 p-1">Mlfq InterVal:</span>
-      <input type="text" class="form-control" id="rr" placeholder="mlfqI...." [(ngModel)]="mlfqI" value={{mlfqI}}>
-      <input type="text" class="form-control mt-3" id="rr" placeholder="mlfqII...." [(ngModel)]="mlfqII" value={{mlfqII}}> -->
+      <input type="text " class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
+      <span class="mt-3 col-sm-2 ">Mlfq InterVal:</span>
+
+      <input type="text" class="form-control " id="mlfqI" placeholder="mlfqI...." [(ngModel)]="mlfqI" value={{mlfqI}}>
+      <input type="text" class="form-control mt-3 " id="mlfqII" placeholder="mlfqII...." [(ngModel)]="mlfqII" value={{mlfqII}}>
+      <input type="text" class="form-control mt-3 " id="mlfqIII" placeholder="mlfqIII...." [(ngModel)]="mlfqIII" value={{mlfqIII}}>
+      </div>
+
+
 
 
     </label>
@@ -34,6 +41,9 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
     </div>
     <div class="d-md-none col-12 mt-2 p-0">
       <input type="text" placeholder="Round Robbin Interval" class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
+      <input type="text" class="form-control mt-3 " id="mlfqI" placeholder="mlfqI...." [(ngModel)]="mlfqI" value={{mlfqI}}>
+      <input type="text" class="form-control mt-3 " id="mlfqII" placeholder="mlfqII...." [(ngModel)]="mlfqII" value={{mlfqII}}>
+      <input type="text" class="form-control mt-3 " id="mlfqIII" placeholder="mlfqIII...." [(ngModel)]="mlfqIII" value={{mlfqIII}}>
     </div>
 
 
@@ -106,6 +116,9 @@ export class TableComponent implements OnInit {
   submitted = false;
   rr: number = 3;
   rrWarning = false;
+  mlfqI : number= 2;
+  mlfqII : number= 2;
+  mlfqIII: number= 2;
 
   orderForm: FormGroup | undefined;
   items: FormArray | undefined;
@@ -142,7 +155,7 @@ export class TableComponent implements OnInit {
   }
 
   runProcess () {
-    if(this.rr < 1 ) {
+    if(this.rr<1 ||(this.mlfqI && this.mlfqII && this.mlfqIII)<1 ) {
       this.rrWarning = true;
     }
     else{

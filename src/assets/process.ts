@@ -10,7 +10,7 @@ export default class Process{
   color: string | undefined;
   length: number | undefined;
 
-  constructor (processName: string, arrivalTime: number,  burstTime: number, color: any,) {
+  constructor (processName: string, arrivalTime: number,burstTime: number, color: any,) {
     this.processName = processName;
     this.processDtl = {
       arrivalTime: Number(arrivalTime),
@@ -18,7 +18,6 @@ export default class Process{
       startTime: -1,
       leftTime: Number(burstTime),
       endTime: -1,
-      // Pid:-1,
       turnAround: -1,
       waitTime: -1
     };
@@ -93,3 +92,5 @@ export function clone(instance: any) {
     JSON.parse(JSON.stringify(instance)),
   );
 }
+
+
