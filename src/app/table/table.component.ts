@@ -116,9 +116,9 @@ export class TableComponent implements OnInit {
   submitted = false;
   rr: number = 3;
   rrWarning = false;
-  mlfqI : number= 2;
-  mlfqII : number= 2;
-  mlfqIII: number= 2;
+  mlfqI : number= 8;
+  mlfqII : number= 16;
+  mlfqIII: number= 32;
 
   orderForm: FormGroup | undefined;
   items: FormArray | undefined;

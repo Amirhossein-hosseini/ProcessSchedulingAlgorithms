@@ -4,8 +4,8 @@ import { compareBurstTime, compareArrival } from '../comparators/comparators';
 export default function psjf(p: process[]) {
   let waitingList: process[] = [...p].sort(compareArrival);
   let minArr = findMinArrival(p);
-  let psjfPro: process[] = [...p]; 
-  let psjf: process[] = []; 
+  let psjfPro: process[] = [...p];
+  let psjf: process[] = [];
   let arrivedList: process[] = [];
 
   let totalBurstTime = waitingList.reduce((total, currp) => {
@@ -25,9 +25,9 @@ export default function psjf(p: process[]) {
       else break;
     }
 
-    if(arrivedList.length > 1){
-      arrivedList.sort(compareBurstTime);
-    }
+  if(arrivedList.length>0){
+    waitingList.sort(compareBurstTime)
+  }
 
     if(psjf[psjf.length - 1].isCompleted()) {
       psjf[psjf.length - 1].setEndTime(i);
@@ -66,7 +66,7 @@ export default function psjf(p: process[]) {
         psjf[psjf.length - 1].setStartTime(i);
         psjf[psjf.length - 1].setLeftTime();
         arrivedList.shift();
-        
+
         arrivedList.sort(compareBurstTime);
       }
       else {
