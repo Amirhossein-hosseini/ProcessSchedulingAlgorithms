@@ -29,8 +29,8 @@ export class MlfqComponent implements OnInit {
   }
 
   calculatePSJF() {
-    this.mlfqprocess = mlfq(this.process, this.myProcess.mlfqI,this.myProcess.mlfqII,this.myProcess.mlfqIII).rr
-    this.calprocess = mlfq(this.process, this.myProcess.mlfqI,this.myProcess.mlfqII,this.myProcess.mlfqIII).rrPro
+    this.mlfqprocess = mlfq(this.process, this.myProcess.mlfqI,this.myProcess.mlfqII,this.myProcess.mlfqIII).mlfq
+    this.calprocess = mlfq(this.process, this.myProcess.mlfqI,this.myProcess.mlfqII,this.myProcess.mlfqIII).mlfqPro
     console.log(this.mlfqprocess.length);
     this.totalBurstTime = this.mlfqprocess.reduce((sum, p) => {
       return sum + p.getBurstTime();

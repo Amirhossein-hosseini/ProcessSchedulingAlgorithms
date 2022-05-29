@@ -18,16 +18,16 @@ export default function psjf(p: process[]) {
   waitingList.shift();
   for(let i = minArr + 1; i <= totalBurstTime; i++) {
     for(let n = 0; n < waitingList.length; n++) {
-      if(waitingList[n].getArrivalTime() === i) {
+      if(waitingList[n].getArrivalTime() <= i) {
         arrivedList.push(clone(waitingList[n]));
         waitingList.shift();
       }
       else break;
     }
 
-  if(arrivedList.length>0){
-    waitingList.sort(compareBurstTime)
-  }
+    if(arrivedList.length > 1){
+      arrivedList.sort(compareBurstTime);
+    }
 
     if(psjf[psjf.length - 1].isCompleted()) {
       psjf[psjf.length - 1].setEndTime(i);

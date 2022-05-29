@@ -9,7 +9,7 @@ export default function npsjf(process: process[]) {
 
   let totalBurstTime = waitingList.reduce((total, currp) => {
     return total + currp.getBurstTime();
-  }, 0) + minArr;
+  }, 0)+ minArr;
 
   npsjfPro.push(clone(waitingList[0]));
   npsjfPro[0].setStartTime(minArr);
@@ -17,11 +17,13 @@ export default function npsjf(process: process[]) {
   waitingList.shift();
   for(let i = minArr + 1; i <= totalBurstTime; i++){
     for(let j = 0; j < waitingList.length; j++){
-      if(waitingList[j].getArrivalTime() === i){
+      if(waitingList[j].getArrivalTime() <= i){
         arrivedList.push(clone(waitingList[j]));
         waitingList.shift();
       }
-      else break;
+      else {
+     break;
+      }
     }
 
     if(arrivedList.length > 1){
@@ -53,8 +55,9 @@ export default function npsjf(process: process[]) {
 function findMinArrival (process: any) {
   let min = 100;
     process.forEach((p: { getArrivalTime: () => number; }) => {
-      if(p.getArrivalTime() < min)
-        min = p.getArrivalTime();
+      if(p.getArrivalTime() < min){
+        min = p.getArrivalTime()}
+
     })
 
   return min;
