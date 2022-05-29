@@ -8,7 +8,7 @@ export default function rr(p: process[], rrI: number) {
   let rr: process[] = [];
   let totalBurstTime = waitingList.reduce((total, currp) => {
     return total + currp.getBurstTime();
-  }, 0);
+  }, 0)+minArr
 
   rr.push(clone(waitingList[0]));
   rr[0].setStartTime(minArr);
@@ -18,7 +18,7 @@ export default function rr(p: process[], rrI: number) {
 
 
     if(rr[rr.length - 1].isCompleted()) {
-      rr[rr.length - 1].setEndTime(i);
+      rr[rr.length - 1].setEndTime(minArr+i);
 
       let temp = rrPro.find(o => o.getProcessName() === rr[rr.length - 1].getProcessName());
       let index: number
@@ -31,7 +31,7 @@ export default function rr(p: process[], rrI: number) {
 
       if(waitingList.length > 0) {
         rr.push(clone(waitingList[0]));
-        rr[rr.length - 1].setStartTime(i);
+        rr[rr.length - 1].setStartTime(minArr+i);
         rr[rr.length - 1].setLeftTime()
         waitingList.shift();
 
@@ -45,9 +45,9 @@ export default function rr(p: process[], rrI: number) {
     }
     else {
       if(waitingList.length > 0 && i % rrI === 0) {
-        rr[rr.length - 1].setEndTime(minArr+i);
+        rr[rr.length - 1].setEndTime(i);
         waitingList.push(clone(rr[rr.length - 1]));
-        waitingList[waitingList.length - 1].setArrivalTime(minArr+i);
+        waitingList[waitingList.length - 1].setArrivalTime(i);
         waitingList.sort(compareArrival);
 
         rr.push(clone(waitingList[0]));
@@ -66,7 +66,7 @@ export default function rr(p: process[], rrI: number) {
 function findMinArrival (process: any) {
   let min = 100;
     process.forEach((p: { getArrivalTime: () => number; }) => {
-      if(p.getArrivalTime() < min)
+      if(p.getArrivalTime() < min && p.getArrivalTime()!==0)
         min = p.getArrivalTime();
     })
 

@@ -9,7 +9,7 @@ export default function mlfq(p: process[], mlfqI: number,mlfqII: number,mlfqIII:
   let mlfq: process[] = [];
   let totalBurstTime = waitingList.reduce((total, currp) => {
     return total +currp.getBurstTime();
-  }, 0)
+  }, 0)+ minArr;
   let queue= new Queue()
   let queue2=  new Queue()
   let queue3 = new Queue()
@@ -55,42 +55,53 @@ queueTotal.enqueue(queue3)
       }
     }
     else {
-      if(waitingList.length > 0 && i % mlfqI === 0) {
-        mlfq[mlfq.length - 1].setEndTime(i);
-        waitingList.push(clone(mlfq[mlfq.length - 1]));
-        waitingList[waitingList.length - 1].setArrivalTime(i);
-        queue.enqueue(clone(mlfq[waitingList.length - 1]))
-        waitingList.sort(compareArrival);
+      if(queue.size() == 0 && i % mlfqI === 0) {
 
-        mlfq.push(clone(waitingList[0]));
-        mlfq[mlfq.length - 1].setStartTime(i);
-        mlfq[mlfq.length - 1].setLeftTime();
-        waitingList.shift();
+          mlfq[mlfq.length - 1].setEndTime(mlfqI+i);
+          waitingList.push(clone(mlfq[mlfq.length - 1]));
+          waitingList[waitingList.length - 1].setArrivalTime(i);
+           //queue.enqueue(clone(mlfq[waitingList.length - 1]))
+           queue.enqueue(mlfq);
+          waitingList.sort(compareArrival);
+
+          mlfq.push(clone(waitingList[0]));
+          mlfq[mlfq.length - 1].setStartTime(i);
+          mlfq[mlfq.length - 1].setLeftTime();
+          waitingList.shift();
+
+
       }
-      else if(queue.size()>queue2.size() && i %mlfqII==0) {
-        mlfq[mlfq.length - 1].setEndTime(i);
-        waitingList.push(clone(mlfq[mlfq.length - 1]));
-        waitingList[waitingList.length - 1].setArrivalTime(i);
-        queue2.enqueue(clone(mlfq[waitingList.length - 1]))
-        waitingList.sort(compareArrival);
+      else if(queue.size()>0 && i %mlfqII==0) {
 
-        mlfq.push(clone(waitingList[0]));
-        mlfq[mlfq.length - 1].setStartTime(i);
-        mlfq[mlfq.length - 1].setLeftTime();
-        waitingList.shift();
+          mlfq[mlfq.length - 1].setEndTime(i);
+          waitingList.push(clone(mlfq[mlfq.length - 1]));
+          waitingList[waitingList.length - 1].setArrivalTime(i);
+           //queue2.enqueue(clone(mlfq[waitingList.length - 1]))
+           queue2.enqueue(mlfq)
+          waitingList.sort(compareArrival);
+
+          mlfq.push(clone(waitingList[0]));
+          mlfq[mlfq.length - 1].setStartTime(mlfqII+i);
+          mlfq[mlfq.length - 1].setLeftTime();
+          waitingList.shift();
+
+
       }
       else if(queue2.size()>queue.size() && i %mlfqIII==0){
-        mlfq[mlfq.length - 1].setEndTime(i);
-        waitingList.push(clone(mlfq[mlfq.length - 1]));
-        waitingList[waitingList.length - 1].setArrivalTime(i);
-        queue3.enqueue(clone(mlfq[waitingList.length - 1]))
-        waitingList.sort(compareArrival);
+          mlfq[mlfq.length - 1].setEndTime(i);
+          waitingList.push(clone(mlfq[mlfq.length - 1]));
+          waitingList[waitingList.length - 1].setArrivalTime(i);
+           //queue3.enqueue(clone(mlfq[waitingList.length - 1]))
+           queue3.enqueue(mlfq);
+          waitingList.sort(compareArrival);
 
-        mlfq.push(clone(waitingList[0]));
-        queue3.enqueue(clone(mlfq[waitingList.length - 1]))
-        mlfq[mlfq.length - 1].setStartTime(i);
-        mlfq[mlfq.length - 1].setLeftTime();
-        waitingList.shift();
+          mlfq.push(clone(waitingList[0]));
+          //queue3.enqueue(clone(mlfq[waitingList.length - 1]))
+          mlfq[mlfq.length - 1].setStartTime(mlfqIII+i);
+          mlfq[mlfq.length - 1].setLeftTime();
+          waitingList.shift();
+
+
       }
       else{
    waitingList.sort(compareName);
@@ -106,9 +117,11 @@ queueTotal.enqueue(queue3)
 function findMinArrival (process: any) {
   let min = 100;
     process.forEach((p: { getArrivalTime: () => number; }) => {
-      if(p.getArrivalTime() < min)
+      if(p.getArrivalTime() < min && p.getArrivalTime() !==0)
         min = p.getArrivalTime();
     })
 
   return min;
 }
+
+
