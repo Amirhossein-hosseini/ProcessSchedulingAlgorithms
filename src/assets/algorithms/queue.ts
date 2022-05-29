@@ -27,7 +27,5 @@ export class Queue<T> implements IQueue<T> {
       return this.capacity === this.size();
     }
 
-    ToArray(){
-      return this.storage;
-    }
+
 }

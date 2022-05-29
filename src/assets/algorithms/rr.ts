@@ -14,7 +14,7 @@ export default function rr(p: process[], rrI: number) {
   rr[0].setStartTime(minArr);
   rr[0].setLeftTime();
   waitingList.shift();
-  for(let i = minArr; i <= totalBurstTime; i++) {
+  for(let i = minArr+1; i <= totalBurstTime; i++) {
 
 
     if(rr[rr.length - 1].isCompleted()) {
@@ -66,8 +66,9 @@ export default function rr(p: process[], rrI: number) {
 function findMinArrival (process: any) {
   let min = 100;
     process.forEach((p: { getArrivalTime: () => number; }) => {
-      if(p.getArrivalTime() < min && p.getArrivalTime()!==0)
+      if(p.getArrivalTime() < min )
         min = p.getArrivalTime();
+
     })
 
   return min;

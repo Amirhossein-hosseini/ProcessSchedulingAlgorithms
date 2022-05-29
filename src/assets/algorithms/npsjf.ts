@@ -55,7 +55,7 @@ export default function npsjf(process: process[]) {
 function findMinArrival (process: any) {
   let min = 100;
     process.forEach((p: { getArrivalTime: () => number; }) => {
-      if(p.getArrivalTime() < min){
+      if(p.getArrivalTime() < min ){
         min = p.getArrivalTime()}
 
     })
