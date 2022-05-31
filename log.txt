@@ -1,0 +1,10 @@
+706df4b (HEAD -> master) error in mlfq and rr for abut after p3
+15a856d know error in mlfq and rr in p3
+8d52bbf error handling rr,psjs,npsjf,fcfc for can not give zero and only mlfq for handling error
+e089d3c compelete mlfq,rr,fcfs and not compelete sjf and srt
+0c43738 (main/master) update Readme
+eacba0a compelete the project but mlfq problem
+5b81204 delete component npp
+58ced09 compelete project
+8ea7718 end of the rr,sjf,srt,fcfs
+c09efaa (origin/main, origin/HEAD) Update README.md
